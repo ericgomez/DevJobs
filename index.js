@@ -8,6 +8,9 @@ const app = express()
 app.engine('handlebars', engine())
 app.set('view engine', 'handlebars')
 
+// static files
+app.use(express.static('public'))
+
 app.use('/', router())
 
 app.listen(5000)
