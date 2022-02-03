@@ -55,10 +55,10 @@ h3 {
   display: block;
   border: none;
 }
-.btn-verde {
+.btn-green {
   background-color: #00c897;
 }
-.btn-verde:hover {
+.btn-green:hover {
   background-color: rgb(10, 155, 119);
 }
 
