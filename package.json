@@ -1,0 +1,18 @@
+{
+  "name": "dev-job",
+  "version": "1.0.0",
+  "description": "Dev Job",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon ./index"
+  },
+  "author": "Eric Gomez <eric.gomez.sanchez@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.2",
+    "express-handlebars": "^6.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
