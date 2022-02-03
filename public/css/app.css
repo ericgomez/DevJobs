@@ -428,7 +428,7 @@ p.candidates {
   margin-right: 2rem;
 }
 .list-candidates p,
-.list-vacants p {
+.list-vacancies p {
   color: white;
   text-align: center;
 }
