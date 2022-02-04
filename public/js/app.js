@@ -4,6 +4,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (skills) {
     skills.addEventListener('click', addSkills)
+
+    //if is edit
+    selectedSkills()
   }
 })
 
@@ -20,6 +23,18 @@ const addSkills = e => {
     }
   }
 
+  const skillsArray = [...skills]
+  document.querySelector('#skills').value = skillsArray
+}
+
+const selectedSkills = () => {
+  const selected = Array.from(document.querySelectorAll('.list-skills .active'))
+
+  selected.forEach(skill => {
+    skills.add(skill.textContent)
+  })
+
+  // Inject in hidden
   const skillsArray = [...skills]
   document.querySelector('#skills').value = skillsArray
 }
