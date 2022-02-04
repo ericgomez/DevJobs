@@ -25,11 +25,13 @@
     <div class="campo">
       <label for="contract">Contract</label>
       <select name="contract">
-        <option value="" disabled selected>-- Select --</option>
-        <option value="freelance">Freelance</option>
-        <option value="fulltime">Full time</option>
-        <option value="halftime">Half time</option>
-        <option value="project">By project</option>
+        {{#typeContract vacant.contract}}
+          <option value="" disabled selected>-- Select --</option>
+          <option value="freelance">Freelance</option>
+          <option value="fulltime">Full time</option>
+          <option value="halftime">Half time</option>
+          <option value="project">By project</option>
+        {{/typeContract}}
       </select>
     </div>
 
