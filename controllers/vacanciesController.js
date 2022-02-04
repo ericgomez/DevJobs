@@ -40,7 +40,7 @@ const formEditVacant = async (req, res = response, next) => {
   if (!vacant) return next()
 
   res.render('edit-vacant', {
-    pageName: 'Edit ${vacant.title}',
+    pageName: `Edit ${vacant.title}`,
     tagline: 'Edit a vacant',
     vacant
   })
@@ -49,5 +49,6 @@ const formEditVacant = async (req, res = response, next) => {
 module.exports = {
   formNewVacant,
   addVacant,
-  showVacant
+  showVacant,
+  formEditVacant
 }

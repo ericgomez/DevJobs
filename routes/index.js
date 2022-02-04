@@ -5,7 +5,8 @@ const { showJobs } = require('../controllers/homeController')
 const {
   formNewVacant,
   addVacant,
-  showVacant
+  showVacant,
+  formEditVacant
 } = require('../controllers/vacanciesController')
 
 module.exports = () => {
