@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon ./index",
-    "start": "concurrently \"run watch\" \"npm run dev\"",
+    "start": "concurrently \"npm run dev\" \"npm run watch\"",
     "watch": "webpack --watch --mode=development"
   },
   "author": "Eric Gomez <eric.gomez.sanchez@gmail.com>",
