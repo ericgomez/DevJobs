@@ -1,0 +1,35 @@
+<div class="content-superior vacant container">
+  <div class="box">
+    <p class="label">Company</p>
+    <p class="name">{{vacant.company}}</p>
+  </div>
+  <div class="box">
+    <p class="label">Location</p>
+    <p class="name">{{vacant.location}}</p>
+  </div>
+    <div class="box">
+    <p class="label">Contract</p>
+    <p class="name">{{vacant.contract}}</p>
+  </div>
+    <div class="box">
+    <p class="label">Salary</p>
+    <p class="name">$ {{vacant.salary}}</p>
+  </div>
+</div>
+
+<div class="vacant-container container">
+  <main class="content">
+    <h2>Description Job</h2>
+    <div class="vacant-description">
+      {{{vacant.description}}}
+    </div>
+  </main>
+  <aside class="aside">
+    <h2>Desired Skills</h2>
+    <ul class="skills">
+      {{#each vacant.skills}}
+        <li>{{this}}</li>
+      {{/each}}
+    </ul>
+  </aside>
+</div>

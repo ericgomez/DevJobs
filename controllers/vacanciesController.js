@@ -22,7 +22,20 @@ const addVacant = async (req, res = response) => {
   res.redirect(`/vacancies/${newVacant.url}`)
 }
 
+const showVacant = async (req, res = response, next) => {
+  const vacant = await Vacant.findOne({ url: req.params.url })
+
+  if (!vacant) return next()
+
+  res.render('vacant', {
+    pageName: vacant.title,
+    line: true,
+    vacant
+  })
+}
+
 module.exports = {
   formNewVacant,
-  addVacant
+  addVacant,
+  showVacant
 }
