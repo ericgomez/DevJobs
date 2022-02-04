@@ -15,7 +15,16 @@ const app = express()
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
-app.engine('handlebars', engine({ helpers: require('./helpers/handlebars') }))
+app.engine(
+  'handlebars',
+  engine({
+    helpers: require('./helpers/handlebars'),
+    runtimeOptions: {
+      allowProtoPropertiesByDefault: true,
+      allowProtoMethodsByDefault: true
+    }
+  })
+)
 app.set('view engine', 'handlebars')
 
 // static files
