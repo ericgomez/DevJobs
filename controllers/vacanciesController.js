@@ -46,9 +46,28 @@ const formEditVacant = async (req, res = response, next) => {
   })
 }
 
+const editVacant = async (req, res = response, next) => {
+  const vacant = req.body
+
+  // create array with skills
+  // split - creating array separated by commas
+  vacant.skills = req.body.skills.split(',')
+
+  // Save in DB
+  const editVacant = await Vacant.findOneAndUpdate(
+    { url: req.params.url },
+    vacant,
+    { new: true, runValidators: true }
+  )
+
+  // redirect to new vacant
+  res.redirect(`/vacancies/${editVacant.url}`)
+}
+
 module.exports = {
   formNewVacant,
   addVacant,
   showVacant,
-  formEditVacant
+  formEditVacant,
+  editVacant
 }

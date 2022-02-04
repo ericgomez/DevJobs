@@ -6,7 +6,8 @@ const {
   formNewVacant,
   addVacant,
   showVacant,
-  formEditVacant
+  formEditVacant,
+  editVacant
 } = require('../controllers/vacanciesController')
 
 module.exports = () => {
@@ -19,6 +20,7 @@ module.exports = () => {
   // Show vacancy
   router.get('/vacancies/:url', showVacant)
   router.get('/vacancies/edit/:url', formEditVacant)
+  router.post('/vacancies/edit/:url', editVacant)
 
   return router
 }
