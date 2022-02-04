@@ -10,7 +10,7 @@ const router = require('./routes')
 
 const app = express()
 
-app.engine('handlebars', engine())
+app.engine('handlebars', engine({ helpers: require('./helpers/handlebars') }))
 app.set('view engine', 'handlebars')
 
 // static files
