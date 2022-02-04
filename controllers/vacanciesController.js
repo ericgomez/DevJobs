@@ -34,6 +34,18 @@ const showVacant = async (req, res = response, next) => {
   })
 }
 
+const formEditVacant = async (req, res = response, next) => {
+  const vacant = await Vacant.findOne({ url: req.params.url })
+
+  if (!vacant) return next()
+
+  res.render('edit-vacant', {
+    pageName: 'Edit ${vacant.title}',
+    tagline: 'Edit a vacant',
+    vacant
+  })
+}
+
 module.exports = {
   formNewVacant,
   addVacant,

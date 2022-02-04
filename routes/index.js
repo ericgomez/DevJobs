@@ -17,6 +17,7 @@ module.exports = () => {
 
   // Show vacancy
   router.get('/vacancies/:url', showVacant)
+  router.get('/vacancies/edit/:url', formEditVacant)
 
   return router
 }
