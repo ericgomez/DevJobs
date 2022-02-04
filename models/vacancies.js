@@ -2,10 +2,10 @@ const { Schema, model } = require('mongoose')
 const slug = require('slug')
 const { nanoid } = require('nanoid')
 
-const vacanciesSchema = new Schema({
+const VacanciesSchema = Schema({
   title: {
     type: String,
-    required: 'The name of vacant is required',
+    required: [true, 'The name of vacant is required'],
     trim: true
   },
   company: {
@@ -15,7 +15,7 @@ const vacanciesSchema = new Schema({
   location: {
     type: String,
     trim: true,
-    required: 'The location is required'
+    required: [true, 'The location is required']
   },
   salary: {
     type: String,
@@ -44,11 +44,11 @@ const vacanciesSchema = new Schema({
   ]
 })
 
-vacanciesSchema.pre('save', function (next) {
+VacanciesSchema.pre('save', function (next) {
   const url = slug(this.title)
   this.url = `${url}-${nanoid()}`
 
   next()
 })
 
-module.exports = model('Vacant', vacanciesSchema)
+module.exports = model('Vacant', VacanciesSchema)

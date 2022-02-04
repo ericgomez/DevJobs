@@ -3,12 +3,17 @@ const { engine } = require('express-handlebars')
 const cookieParser = require('cookie-parser')
 const session = require('express-session')
 const MongoStore = require('connect-mongo')
+const bodyParser = require('body-parser')
 require('dotenv').config()
 
 const { dbConnect } = require('./config/db')
 const router = require('./routes')
 
 const app = express()
+
+//enabling body parser
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false }))
 
 app.engine('handlebars', engine({ helpers: require('./helpers/handlebars') }))
 app.set('view engine', 'handlebars')
