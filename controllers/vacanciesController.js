@@ -2,7 +2,7 @@ const { response } = require('express')
 const Vacant = require('../models/vacancies')
 
 const formNewVacant = (req, res = response) => {
-  res.render('new-vacant', {
+  res.render('vacancies/new-vacant', {
     pageName: 'New Vacant',
     tagline: 'Create a new vacant'
   })
@@ -27,7 +27,7 @@ const showVacant = async (req, res = response, next) => {
 
   if (!vacant) return next()
 
-  res.render('vacant', {
+  res.render('vacancies/vacant', {
     pageName: vacant.title,
     line: true,
     vacant
@@ -39,7 +39,7 @@ const formEditVacant = async (req, res = response, next) => {
 
   if (!vacant) return next()
 
-  res.render('edit-vacant', {
+  res.render('vacancies/edit-vacant', {
     pageName: `Edit ${vacant.title}`,
     tagline: 'Edit a vacant',
     vacant
