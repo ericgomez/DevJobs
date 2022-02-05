@@ -4,6 +4,8 @@ const cookieParser = require('cookie-parser')
 const session = require('express-session')
 const MongoStore = require('connect-mongo')
 const bodyParser = require('body-parser')
+const flash = require('connect-flash')
+
 require('dotenv').config()
 
 const { dbConnect } = require('./config/db')
@@ -43,6 +45,16 @@ app.use(
     })
   })
 )
+
+// alert and flash messages
+app.use(flash())
+
+// create my middleware
+app.use((req, res, next) => {
+  res.locals.messages = req.flash()
+
+  next()
+})
 
 app.use('/', router())
 

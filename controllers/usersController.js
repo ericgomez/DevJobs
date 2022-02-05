@@ -1,4 +1,6 @@
 const { response } = require('express')
+const { check, validationResult } = require('express-validator')
+
 const User = require('../models/users')
 
 const formCreateAccount = (req, res = response) => {
@@ -6,6 +8,17 @@ const formCreateAccount = (req, res = response) => {
     pageName: 'Create Account',
     tagline: 'Create your account'
   })
+}
+
+const confirmRegistration = async (req, res = response, next) => {
+  await check('name', 'The name is required')
+    .notEmpty()
+    .run(req)
+
+  const errors = validationResult(req)
+  console.log(errors)
+
+  return
 }
 
 const addUser = async (req, res = response, next) => {
@@ -20,5 +33,6 @@ const addUser = async (req, res = response, next) => {
 
 module.exports = {
   formCreateAccount,
+  confirmRegistration,
   addUser
 }
