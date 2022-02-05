@@ -9,7 +9,7 @@ const {
   formEditVacant,
   editVacant
 } = require('../controllers/vacanciesController')
-const { formCreateAccount } = require('../controllers/usersController')
+const { formCreateAccount, addUser } = require('../controllers/usersController')
 
 module.exports = () => {
   router.get('/', showJobs)
@@ -25,6 +25,7 @@ module.exports = () => {
 
   // create account
   router.get('/create-account', formCreateAccount)
+  router.post('/create-account', addUser)
 
   return router
 }

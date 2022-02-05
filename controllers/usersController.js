@@ -1,4 +1,5 @@
 const { response } = require('express')
+const User = require('../models/users')
 
 const formCreateAccount = (req, res = response) => {
   res.render('users/create-account', {
@@ -7,6 +8,17 @@ const formCreateAccount = (req, res = response) => {
   })
 }
 
+const addUser = async (req, res = response, next) => {
+  const user = new User(req.body)
+
+  const newUser = await user.save()
+
+  if (!newUser) return next()
+
+  res.redirect('/login')
+}
+
 module.exports = {
-  formCreateAccount
+  formCreateAccount,
+  addUser
 }
