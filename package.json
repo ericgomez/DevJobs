@@ -11,6 +11,7 @@
   "author": "Eric Gomez <eric.gomez.sanchez@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "axios": "^0.25.0",
     "bcrypt": "^5.0.1",
     "connect-flash": "^0.1.1",
     "connect-mongo": "^4.6.0",
@@ -24,7 +25,8 @@
     "nanoid": "^3.2.0",
     "passport": "^0.5.2",
     "passport-local": "^1.0.0",
-    "slug": "^5.2.0"
+    "slug": "^5.2.0",
+    "sweetalert2": "^11.4.0"
   },
   "devDependencies": {
     "@babel/core": "^7.17.0",

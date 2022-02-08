@@ -73,6 +73,12 @@ const editVacancy = async (req, res = response, next) => {
   res.redirect(`/vacancies/${editVacancy.url}`)
 }
 
+const deleteVacancy = async (req, res) => {
+  const { id } = req.params
+
+  console.log(id)
+}
+
 // validate vacancies
 const validateVacancy = async (req, res, next) => {
   await check('title', 'The title is required')
@@ -141,5 +147,6 @@ module.exports = {
   showVacancy,
   formEditVacancy,
   editVacancy,
-  validateVacancy
+  validateVacancy,
+  deleteVacancy
 }

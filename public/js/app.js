@@ -1,3 +1,6 @@
+import axios from 'axios'
+import Swal from 'sweetalert2'
+
 // Esperamos hasta que el DOM esté listo
 document.addEventListener('DOMContentLoaded', () => {
   const skills = document.querySelector('.list-skills')
@@ -14,6 +17,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //if is edit
     selectedSkills()
+  }
+
+  const vacancyList = document.querySelector('.administration-panel')
+
+  if (vacancyList) {
+    vacancyList.addEventListener('click', actionsList)
   }
 })
 
@@ -59,4 +68,16 @@ const cleanAlerts = () => {
       clearInterval(interval)
     }
   }, 2000)
+}
+
+// Delete vacancies
+const actionsList = e => {
+  e.preventDefault()
+
+  if (e.target.dataset.delete) {
+    // delete
+    console.log('delete')
+  } else {
+    location.href = e.target.href
+  }
 }
