@@ -4,4 +4,28 @@
     <a href="/edit-profile" class="btn btn-blue">Edit Profile</a>
     <a href="/vacancies/new" class="btn btn-green">New Vacancies</a>
   </div>
+
+  <h2>Vacancies published</h2>
+
+  {{#if vacancies.length}}
+    {{#each vacancies}}
+      <div class="vacancy">
+        <div class="box">
+          <h3>{{company}}</h3>
+          <p class="job-title">{{title}}</p>
+        </div>
+        <div class="center-vertical box">
+          <a href="/candidates/{{id}}" class="btn btn-yellow">Candidates</a>
+        </div>
+        <div class="center-vertical box">
+          <a href="/vacancies/edit/{{url}}" class="btn btn-green">Edit</a>
+        </div>
+        <div class="center-vertical box">
+          <a href="#" data-delete={{id}} class="btn btn-red">Delete</a>
+        </div>
+      </div>
+    {{/each}}
+  {{else}}
+    <p>No vacancies published</p>
+  {{/if}}
 </main>

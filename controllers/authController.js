@@ -1,4 +1,5 @@
 const passport = require('passport')
+const Vacancy = require('../models/vacancies')
 
 const authenticateUser = passport.authenticate('local', {
   successRedirect: '/management',
@@ -15,10 +16,16 @@ const isAuthenticated = (req, res, next) => {
   res.redirect('/login')
 }
 
-const showDashboard = (req, res) => {
+const showDashboard = async (req, res) => {
+  // check user authentication
+  const vacancies = await Vacancy.find({ author: req.user._id })
+
+  console.log(vacancies)
+
   res.render('management/dashboard', {
     pageName: 'Dashboard',
-    tagline: 'Management'
+    tagline: 'Management',
+    vacancies
   })
 }
 
