@@ -21,6 +21,7 @@ const confirmRegistration = async (req, res = response, next) => {
     .notEmpty()
     .escape()
     .trim()
+    .isEmail()
     .run(req)
 
   await check('password', 'Password is required')
@@ -120,11 +121,57 @@ const editProfile = async (req, res = response, next) => {
   }
 }
 
+const validateProfile = async (req, res, next) => {
+  await check('name', 'The name is required')
+    .notEmpty()
+    .escape()
+    .trim()
+    .run(req)
+
+  await check('email', 'email is required')
+    .notEmpty()
+    .escape()
+    .trim()
+    .isEmail()
+    .withMessage('email format not valid')
+    .run(req)
+
+  await check('password', 'password is required')
+    .escape()
+    .trim()
+    .run(req)
+
+  // destructuring the validation result
+  const { errors } = validationResult(req)
+  // console.log(errors)
+
+  if (errors) {
+    req.flash(
+      'error',
+      errors.map(error => error.msg)
+    )
+
+    res.render('users/edit-profile', {
+      pageName: 'Edit Profile',
+      tagline: 'Edit your profile',
+      user: req.user,
+      name: req.user.name,
+      logout: true,
+      messages: req.flash()
+    })
+
+    return
+  }
+
+  next()
+}
+
 module.exports = {
   formCreateAccount,
   confirmRegistration,
   addUser,
   formLogin,
   formEditProfile,
-  editProfile
+  editProfile,
+  validateProfile
 }
