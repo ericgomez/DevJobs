@@ -80,8 +80,15 @@ const addUser = async (req, res = response, next) => {
   }
 }
 
+const formLogin = (req, res = response) => {
+  res.render('users/login', {
+    pageName: 'Login in DevJobs'
+  })
+}
+
 module.exports = {
   formCreateAccount,
   confirmRegistration,
-  addUser
+  addUser,
+  formLogin
 }

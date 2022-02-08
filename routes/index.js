@@ -12,7 +12,8 @@ const {
 const {
   formCreateAccount,
   confirmRegistration,
-  addUser
+  addUser,
+  formLogin
 } = require('../controllers/usersController')
 
 module.exports = () => {
@@ -30,6 +31,9 @@ module.exports = () => {
   // create account
   router.get('/create-account', formCreateAccount)
   router.post('/create-account', confirmRegistration, addUser)
+
+  // user auth
+  router.get('/login', formLogin)
 
   return router
 }
