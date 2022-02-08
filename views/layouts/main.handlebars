@@ -25,6 +25,27 @@
         </form>
       </div>
     {{/if}}
+
+    {{#if logout}}
+      <div class="logout">
+        <p>Hello! {{name}}</p>
+        <a href="/management">Dashboard</a>
+        <a href="/logout">Logout</a>
+      </div>
+    {{/if}}
+
+    {{!-- {{#if login}}
+      <div class="login">
+        <a href="/login">Login</a>
+      </div>
+    {{/if}}
+
+    {{#if register}}
+      <div class="register">
+        <a href="/register">Register</a>
+      </div>
+    {{/if}} --}}
+
   </div>
 
   <header class="site-header container separator">

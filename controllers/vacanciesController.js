@@ -4,7 +4,9 @@ const Vacancy = require('../models/vacancies')
 const formNewVacancy = (req, res = response) => {
   res.render('vacancies/new-vacancy', {
     pageName: 'New Vacancy',
-    tagline: 'Create a new vacancy'
+    tagline: 'Create a new vacancy',
+    name: req.user.name,
+    logout: true
   })
 }
 
@@ -45,7 +47,9 @@ const formEditVacancy = async (req, res = response, next) => {
   res.render('vacancies/edit-vacancy', {
     pageName: `Edit ${vacancy.title}`,
     tagline: 'Edit a vacancy',
-    vacancy
+    vacancy,
+    name: req.user.name,
+    logout: true
   })
 }
 

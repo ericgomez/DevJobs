@@ -90,7 +90,9 @@ const formEditProfile = (req, res = response) => {
   res.render('users/edit-profile', {
     pageName: 'Edit Profile',
     tagline: 'Edit your profile',
-    user: req.user
+    user: req.user,
+    name: req.user.name,
+    logout: true
   })
 }
 

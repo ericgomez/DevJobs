@@ -25,6 +25,8 @@ const showDashboard = async (req, res) => {
   res.render('management/dashboard', {
     pageName: 'Dashboard',
     tagline: 'Management',
+    name: req.user.name,
+    logout: true,
     vacancies
   })
 }
