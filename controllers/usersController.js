@@ -13,12 +13,46 @@ const formCreateAccount = (req, res = response) => {
 const confirmRegistration = async (req, res = response, next) => {
   await check('name', 'The name is required')
     .notEmpty()
+    .escape()
+    .trim()
+    .run(req)
+
+  await check('email', 'Email is required')
+    .notEmpty()
+    .escape()
+    .trim()
+    .run(req)
+
+  await check('password', 'Password is required')
+    .notEmpty()
+    .escape()
+    .trim()
+    .run(req)
+
+  await check('password_confirmation', 'Password confirmation is required')
+    .notEmpty()
+    .escape()
+    .trim()
+    .run(req)
+
+  await check('password_confirmation')
+    .custom((value, { req }) => {
+      if (value !== req.body.password) {
+        throw new Error('Password confirmation does not match password')
+      }
+      return true
+    })
     .run(req)
 
   const errors = validationResult(req)
-  console.log(errors)
+  // console.log(errors)
 
-  return
+  if (errors) {
+    // TODO: if exist errors, render the form again with the errors
+  }
+
+  // if not exist errors then continue
+  next()
 }
 
 const addUser = async (req, res = response, next) => {
