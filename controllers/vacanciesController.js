@@ -76,7 +76,7 @@ const editVacancy = async (req, res = response, next) => {
 const deleteVacancy = async (req, res) => {
   const { id } = req.params
 
-  console.log(id)
+  res.status(200).send('Vacancy deleted successfully')
 }
 
 // validate vacancies

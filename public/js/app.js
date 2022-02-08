@@ -76,7 +76,29 @@ const actionsList = e => {
 
   if (e.target.dataset.delete) {
     // delete
-    console.log('delete')
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then(result => {
+      const url = `${location.origin}/vacancies/delete/${e.target.dataset.delete}`
+
+      axios.delete(url, { params: { url } }).then(function (response) {
+        if (response.status === 200) {
+          Swal.fire('Deleted!', response.data, 'success')
+        }
+      })
+
+      console.log(
+        e.target.parentElement.parentElement.parentElement.removeChild(
+          e.target.parentElement.parentElement
+        )
+      )
+    })
   } else {
     location.href = e.target.href
   }

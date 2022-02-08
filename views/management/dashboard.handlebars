@@ -7,25 +7,27 @@
 
   <h2>Vacancies published</h2>
 
-  {{#if vacancies.length}}
-    {{#each vacancies}}
-      <div class="vacancy administration-panel">
-        <div class="box">
-          <h3>{{company}}</h3>
-          <p class="job-title">{{title}}</p>
+  <div class="administration-panel">
+    {{#if vacancies.length}}
+      {{#each vacancies}}
+        <div class="vacancy">
+          <div class="box">
+            <h3>{{company}}</h3>
+            <p class="job-title">{{title}}</p>
+          </div>
+          <div class="center-vertical box">
+            <a href="/candidates/{{id}}" class="btn btn-yellow">Candidates</a>
+          </div>
+          <div class="center-vertical box">
+            <a href="/vacancies/edit/{{url}}" class="btn btn-green">Edit</a>
+          </div>
+          <div class="center-vertical box">
+            <a href="#" data-delete={{id}} class="btn btn-red">Delete</a>
+          </div>
         </div>
-        <div class="center-vertical box">
-          <a href="/candidates/{{id}}" class="btn btn-yellow">Candidates</a>
-        </div>
-        <div class="center-vertical box">
-          <a href="/vacancies/edit/{{url}}" class="btn btn-green">Edit</a>
-        </div>
-        <div class="center-vertical box">
-          <a href="#" data-delete={{id}} class="btn btn-red">Delete</a>
-        </div>
-      </div>
-    {{/each}}
-  {{else}}
-    <p>No vacancies published</p>
-  {{/if}}
+      {{/each}}
+    {{else}}
+      <p>No vacancies published</p>
+    {{/if}}
+  </div>
 </main>
