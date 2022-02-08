@@ -76,7 +76,22 @@ const editVacancy = async (req, res = response, next) => {
 const deleteVacancy = async (req, res) => {
   const { id } = req.params
 
-  res.status(200).send('Vacancy deleted successfully')
+  const vacancy = await Vacancy.findById(id)
+
+  // check only author delete vacancies
+  if (verifyAuthor(vacancy, req.user)) {
+    vacancy.remove() // method of mongoose
+
+    res.status(200).send('Vacancy deleted successfully')
+  } else {
+    res.status(403).send('Error')
+  }
+}
+
+const verifyAuthor = (vacancy = {}, user = {}) => {
+  if (!vacancy.author.equals(user._id)) return false
+
+  return true
 }
 
 // validate vacancies

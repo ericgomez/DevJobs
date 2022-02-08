@@ -87,19 +87,24 @@ const actionsList = e => {
     }).then(result => {
       const url = `${location.origin}/vacancies/delete/${e.target.dataset.delete}`
 
-      axios.delete(url, { params: { url } }).then(function (response) {
-        if (response.status === 200) {
-          Swal.fire('Deleted!', response.data, 'success')
-        }
-      })
-
-      console.log(
-        e.target.parentElement.parentElement.parentElement.removeChild(
-          e.target.parentElement.parentElement
-        )
-      )
+      axios
+        .delete(url, { params: { url } })
+        .then(function (response) {
+          if (response.status === 200) {
+            Swal.fire('Deleted!', response.data, 'success')
+          }
+        })
+        .catch(() => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Something went wrong!'
+          })
+        })
     })
-  } else {
+  }
+  // check if the click comes from a link
+  else if (e.target.tagName === 'A') {
     location.href = e.target.href
   }
 }
