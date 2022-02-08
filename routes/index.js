@@ -18,7 +18,8 @@ const {
   formLogin,
   formEditProfile,
   editProfile,
-  validateProfile
+  validateProfile,
+  uploadImage
 } = require('../controllers/usersController')
 
 const {
@@ -63,7 +64,13 @@ module.exports = () => {
 
   // edit - profile
   router.get('/edit-profile', isAuthenticated, formEditProfile)
-  router.post('/edit-profile', isAuthenticated, validateProfile, editProfile)
+  router.post(
+    '/edit-profile',
+    isAuthenticated,
+    // validateProfile,
+    uploadImage,
+    editProfile
+  )
 
   // logout
   router.get('/logout', isAuthenticated, logout)

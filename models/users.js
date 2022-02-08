@@ -18,7 +18,8 @@ const UsersSchema = Schema({
     trim: true
   },
   token: String,
-  tokenExpires: Date
+  tokenExpires: Date,
+  image: String
 })
 
 // hash password before saving

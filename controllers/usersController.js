@@ -1,5 +1,6 @@
 const { response } = require('express')
 const { check, validationResult } = require('express-validator')
+const multer = require('multer')
 
 const User = require('../models/users')
 
@@ -166,6 +167,16 @@ const validateProfile = async (req, res, next) => {
   next()
 }
 
+const uploadImage = (req, res = response, next) => {
+  upload(req, res, function (error) {
+    if (error instanceof multer.MulterError) {
+      return next()
+    }
+  })
+
+  next()
+}
+
 module.exports = {
   formCreateAccount,
   confirmRegistration,
@@ -173,5 +184,6 @@ module.exports = {
   formLogin,
   formEditProfile,
   editProfile,
-  validateProfile
+  validateProfile,
+  uploadImage
 }
