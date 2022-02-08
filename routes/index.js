@@ -16,6 +16,8 @@ const {
   formLogin
 } = require('../controllers/usersController')
 
+const { authenticateUser } = require('../controllers/authController')
+
 module.exports = () => {
   router.get('/', showJobs)
 
@@ -34,6 +36,7 @@ module.exports = () => {
 
   // user auth
   router.get('/login', formLogin)
+  router.post('login', authenticateUser)
 
   return router
 }

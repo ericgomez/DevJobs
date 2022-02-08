@@ -33,7 +33,7 @@ UsersSchema.pre('save', async function (next) {
   next()
 })
 
-UsersSchema.post('save', async function (error, doc, next) {
+UsersSchema.post('save', function (error, doc, next) {
   if (error.name === 'MongoServerError' && error.code === 11000) {
     next(new Error('Email already exists'))
   } else {
@@ -41,5 +41,16 @@ UsersSchema.post('save', async function (error, doc, next) {
     next(error)
   }
 })
+
+// Authenticated user
+UsersSchema.methods = {
+  // compare password
+  comparePassword: async function (candidatePassword, next) {
+    // compare password
+    const isMatch = await bcrypt.compare(candidatePassword, this.password)
+
+    return isMatch
+  }
+}
 
 module.exports = model('User', UsersSchema)
