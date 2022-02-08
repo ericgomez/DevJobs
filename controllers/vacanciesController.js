@@ -1,4 +1,6 @@
 const { response } = require('express')
+const { check, validationResult } = require('express-validator')
+
 const Vacancy = require('../models/vacancies')
 
 const formNewVacancy = (req, res = response) => {
@@ -71,10 +73,73 @@ const editVacancy = async (req, res = response, next) => {
   res.redirect(`/vacancies/${editVacancy.url}`)
 }
 
+// validate vacancies
+const validateVacancy = async (req, res, next) => {
+  await check('title', 'The title is required')
+    .notEmpty()
+    .escape()
+    .trim()
+    .run(req)
+
+  await check('company', 'company is required')
+    .notEmpty()
+    .escape()
+    .trim()
+    .run(req)
+
+  await check('location', 'location is required')
+    .notEmpty()
+    .escape()
+    .trim()
+    .run(req)
+
+  // salary not required
+  await check('salary', 'salary is required')
+    .escape()
+    .trim()
+    .run(req)
+
+  await check('contract', 'contract is required')
+    .notEmpty()
+    .escape()
+    .trim()
+    .run(req)
+
+  await check('skills', 'skills is required')
+    .notEmpty()
+    .escape()
+    .trim()
+    .run(req)
+
+  // destructuring the validation result
+  const { errors } = validationResult(req)
+  // console.log(errors)
+
+  if (errors) {
+    req.flash(
+      'error',
+      errors.map(error => error.msg)
+    )
+
+    res.render('vacancies/new-vacancy', {
+      pageName: 'New Vacancy',
+      tagline: 'Create a new vacancy',
+      name: req.user.name,
+      logout: true,
+      messages: req.flash()
+    })
+
+    return
+  }
+
+  next()
+}
+
 module.exports = {
   formNewVacancy,
   addVacancy,
   showVacancy,
   formEditVacancy,
-  editVacancy
+  editVacancy,
+  validateVacancy
 }
