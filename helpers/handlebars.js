@@ -58,9 +58,8 @@ module.exports = {
           </div>
         `
       })
-
-      console.log(html)
     }
-    // console.log(alerts.fn())
+
+    return (alerts.fn().html = html)
   }
 }

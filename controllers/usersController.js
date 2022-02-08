@@ -48,7 +48,7 @@ const confirmRegistration = async (req, res = response, next) => {
   const { errors } = validationResult(req)
   // console.log(errors)
 
-  if (errors) {
+  if (errors.length) {
     // TODO: add flash message
     req.flash(
       'error',
