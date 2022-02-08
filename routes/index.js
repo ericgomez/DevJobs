@@ -14,7 +14,8 @@ const {
   confirmRegistration,
   addUser,
   formLogin,
-  formEditProfile
+  formEditProfile,
+  editProfile
 } = require('../controllers/usersController')
 
 const {
@@ -48,6 +49,7 @@ module.exports = () => {
 
   // edit - profile
   router.get('/edit-profile', isAuthenticated, formEditProfile)
+  router.post('/edit-profile', isAuthenticated, editProfile)
 
   return router
 }

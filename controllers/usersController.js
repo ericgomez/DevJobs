@@ -94,10 +94,35 @@ const formEditProfile = (req, res = response) => {
   })
 }
 
+const editProfile = async (req, res = response, next) => {
+  const { name, email, password } = req.body
+
+  const user = await User.findById(req.user._id)
+
+  user.name = name
+  user.email = email
+
+  // if password is not empty
+  if (password) {
+    user.password = password
+  }
+
+  try {
+    await user.save()
+
+    req.flash('correct', 'Profile updated successfully')
+    res.redirect('/management')
+  } catch (error) {
+    req.flash('error', error.message)
+    res.redirect('/edit-profile')
+  }
+}
+
 module.exports = {
   formCreateAccount,
   confirmRegistration,
   addUser,
   formLogin,
-  formEditProfile
+  formEditProfile,
+  editProfile
 }
