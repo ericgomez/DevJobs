@@ -33,4 +33,13 @@ UsersSchema.pre('save', async function (next) {
   next()
 })
 
+UsersSchema.post('save', async function (error, doc, next) {
+  if (error.name === 'MongoServerError' && error.code === 11000) {
+    next(new Error('Email already exists'))
+  } else {
+    // we go to the next middleware of error
+    next(error)
+  }
+})
+
 module.exports = model('User', UsersSchema)

@@ -71,11 +71,13 @@ const confirmRegistration = async (req, res = response, next) => {
 const addUser = async (req, res = response, next) => {
   const user = new User(req.body)
 
-  const newUser = await user.save()
-
-  if (!newUser) return next()
-
-  res.redirect('/login')
+  try {
+    await user.save()
+    res.redirect('/login')
+  } catch (error) {
+    req.flash('error', error.message)
+    res.redirect('/create-account')
+  }
 }
 
 module.exports = {
