@@ -10,6 +10,7 @@ require('dotenv').config()
 
 const { dbConnect } = require('./config/db')
 const router = require('./routes')
+const passport = require('./config/passport')
 
 const app = express()
 
@@ -45,6 +46,10 @@ app.use(
     })
   })
 )
+
+// passport
+app.use(passport.initialize())
+app.use(passport.session())
 
 // alert and flash messages
 app.use(flash())

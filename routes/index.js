@@ -36,7 +36,7 @@ module.exports = () => {
 
   // user auth
   router.get('/login', formLogin)
-  router.post('login', authenticateUser)
+  router.post('/login', authenticateUser)
 
   return router
 }
