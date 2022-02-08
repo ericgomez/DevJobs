@@ -44,11 +44,24 @@ const confirmRegistration = async (req, res = response, next) => {
     })
     .run(req)
 
-  const errors = validationResult(req)
+  // destructuring the validation result
+  const { errors } = validationResult(req)
   // console.log(errors)
 
   if (errors) {
-    // TODO: if exist errors, render the form again with the errors
+    // TODO: add flash message
+    req.flash(
+      'error',
+      errors.map(error => error.msg)
+    )
+
+    res.render('users/create-account', {
+      pageName: 'Create Account',
+      tagline: 'Create your account',
+      messages: req.flash()
+    })
+
+    return
   }
 
   // if not exist errors then continue
