@@ -3,7 +3,7 @@
 
   {{#if vacancies.length}}
     {{#each vacancies}}
-      <div class="vacant">
+      <div class="vacancy">
         <div class="box">
           <h3>{{company}}</h3>
           <p class="job-title">
@@ -21,7 +21,7 @@
         <div class="box center-vertical">
           <a href="/vacancies/{{url}}" class="btn btn-green">More information</a>
         </div>
-      </div>{{!-- Vacant  --}}
+      </div>{{!-- Vacancy  --}}
     {{/each}}
   {{else}}
     <p>No vacancies found</p>

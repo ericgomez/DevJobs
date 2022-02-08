@@ -154,7 +154,7 @@ h3 {
 
 @media (min-width: 768px) {
   .candidate,
-  .vacant {
+  .vacancy {
     display: flex;
   }
   .box {
@@ -165,12 +165,12 @@ h3 {
   }
 }
 .candidate,
-.vacant {
+.vacancy {
   padding: 3rem 0;
   border-bottom: 1px solid #272727;
 }
 .candidate,
-.vacant:last-of-type {
+.vacancy:last-of-type {
   border: none;
 }
 .box {
@@ -212,7 +212,7 @@ h3 {
   justify-content: center;
 }
 
-.vacant-container h2 {
+.vacancy-container h2 {
   color: #616065;
   font-size: 2.4rem;
 }
@@ -220,22 +220,22 @@ h3 {
   margin-bottom: 6rem;
 }
 @media (min-width: 768px) {
-  .vacant-container {
+  .vacancy-container {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
   }
-  .vacant-container main {
+  .vacancy-container main {
     flex: 0 0 60%;
   }
-  .vacant-container aside {
+  .vacancy-container aside {
     flex: 0 0 calc(40% - 2rem);
   }
 }
-.vacant-description h1 {
+.vacancy-description h1 {
   line-height: 1.4;
 }
-.vacant-description * {
+.vacancy-description * {
   color: white !important;
   line-height: 2.2;
 }
@@ -243,7 +243,7 @@ h3 {
   color: white;
 }
 .skills li,
-.vacant-description div {
+.vacancy-description div {
   font-size: 1.8rem;
   line-height: 2.4;
 }
@@ -475,7 +475,7 @@ p.candidates {
   opacity: 0;
 }
 
-/** Biografia vacant **/
+/** Biografia vacancy **/
 .info-recruiter h2 {
   color: #616065;
   font-size: 2.4rem;

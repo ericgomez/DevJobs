@@ -5,7 +5,7 @@ const { nanoid } = require('nanoid')
 const VacanciesSchema = Schema({
   title: {
     type: String,
-    required: [true, 'The name of vacant is required'],
+    required: [true, 'The name of vacancy is required'],
     trim: true
   },
   company: {
@@ -41,7 +41,12 @@ const VacanciesSchema = Schema({
       email: String,
       cv: String
     }
-  ]
+  ],
+  author: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+    required: [true, 'The author is required']
+  }
 })
 
 VacanciesSchema.pre('save', function (next) {
@@ -51,4 +56,4 @@ VacanciesSchema.pre('save', function (next) {
   next()
 })
 
-module.exports = model('Vacant', VacanciesSchema)
+module.exports = model('Vacancy', VacanciesSchema)

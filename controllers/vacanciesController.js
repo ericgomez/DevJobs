@@ -1,73 +1,76 @@
 const { response } = require('express')
-const Vacant = require('../models/vacancies')
+const Vacancy = require('../models/vacancies')
 
-const formNewVacant = (req, res = response) => {
-  res.render('vacancies/new-vacant', {
-    pageName: 'New Vacant',
-    tagline: 'Create a new vacant'
+const formNewVacancy = (req, res = response) => {
+  res.render('vacancies/new-vacancy', {
+    pageName: 'New Vacancy',
+    tagline: 'Create a new vacancy'
   })
 }
 
-const addVacant = async (req, res = response) => {
-  const vacant = new Vacant(req.body)
+const addVacancy = async (req, res = response) => {
+  const vacancy = new Vacancy(req.body)
+
+  // add author with user authenticated
+  vacancy.author = req.user._id
 
   // create array with skills
   // split - creating array separated by commas
-  vacant.skills = req.body.skills.split(',')
+  vacancy.skills = req.body.skills.split(',')
 
   // Save in DB
-  const newVacant = await vacant.save()
+  const newVacancy = await vacancy.save()
 
-  // redirect to new vacant
-  res.redirect(`/vacancies/${newVacant.url}`)
+  // redirect to new vacancy
+  res.redirect(`/vacancies/${newVacancy.url}`)
 }
 
-const showVacant = async (req, res = response, next) => {
-  const vacant = await Vacant.findOne({ url: req.params.url })
+const showVacancy = async (req, res = response, next) => {
+  const vacancy = await Vacancy.findOne({ url: req.params.url })
 
-  if (!vacant) return next()
+  if (!vacancy) return next()
 
-  res.render('vacancies/vacant', {
-    pageName: vacant.title,
+  res.render('vacancies/vacancy', {
+    pageName: vacancy.title,
     line: true,
-    vacant
+    vacancy
   })
 }
 
-const formEditVacant = async (req, res = response, next) => {
-  const vacant = await Vacant.findOne({ url: req.params.url })
+const formEditVacancy = async (req, res = response, next) => {
+  const vacancy = await Vacancy.findOne({ url: req.params.url })
 
-  if (!vacant) return next()
+  if (!vacancy) return next()
 
-  res.render('vacancies/edit-vacant', {
-    pageName: `Edit ${vacant.title}`,
-    tagline: 'Edit a vacant',
-    vacant
+  res.render('vacancies/edit-vacancy', {
+    pageName: `Edit ${vacancy.title}`,
+    tagline: 'Edit a vacancy',
+    vacancy
   })
 }
 
-const editVacant = async (req, res = response, next) => {
-  const vacant = req.body
+const editVacancy = async (req, res = response, next) => {
+  const vacancy = req.body
 
   // create array with skills
   // split - creating array separated by commas
-  vacant.skills = req.body.skills.split(',')
+  vacancy.skills = req.body.skills.split(',')
 
   // Save in DB
-  const editVacant = await Vacant.findOneAndUpdate(
+  const editVacancy = await Vacancy.findOneAndUpdate(
     { url: req.params.url },
-    vacant,
+    vacancy,
     { new: true, runValidators: true }
   )
 
-  // redirect to new vacant
-  res.redirect(`/vacancies/${editVacant.url}`)
+  // redirect to new vacancy
+  res.redirect(`/vacancies/${editVacancy.url}`)
 }
 
 module.exports = {
-  formNewVacant,
-  addVacant,
-  showVacant,
-  formEditVacant,
-  editVacant
+  formNewVacancy,
+  addVacancy,
+  showVacancy,
+  formEditVacancy,
+  editVacancy
 }

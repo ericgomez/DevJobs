@@ -3,11 +3,11 @@ const router = Router()
 
 const { showJobs } = require('../controllers/homeController')
 const {
-  formNewVacant,
-  addVacant,
-  showVacant,
-  formEditVacant,
-  editVacant
+  formNewVacancy,
+  addVacancy,
+  showVacancy,
+  formEditVacancy,
+  editVacancy
 } = require('../controllers/vacanciesController')
 const {
   formCreateAccount,
@@ -26,13 +26,13 @@ module.exports = () => {
   router.get('/', showJobs)
 
   // create vacancies
-  router.get('/vacancies/new', isAuthenticated, formNewVacant)
-  router.post('/vacancies/new', isAuthenticated, addVacant)
+  router.get('/vacancies/new', isAuthenticated, formNewVacancy)
+  router.post('/vacancies/new', isAuthenticated, addVacancy)
 
   // Show vacancy
-  router.get('/vacancies/:url', showVacant)
-  router.get('/vacancies/edit/:url', isAuthenticated, formEditVacant)
-  router.post('/vacancies/edit/:url', isAuthenticated, editVacant)
+  router.get('/vacancies/:url', showVacancy)
+  router.get('/vacancies/edit/:url', isAuthenticated, formEditVacancy)
+  router.post('/vacancies/edit/:url', isAuthenticated, editVacancy)
 
   // create account
   router.get('/create-account', formCreateAccount)

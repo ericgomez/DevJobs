@@ -1,35 +1,35 @@
-<div class="content-superior vacant container">
+<div class="content-superior vacancy container">
   <div class="box">
     <p class="label">Company</p>
-    <p class="name">{{vacant.company}}</p>
+    <p class="name">{{vacancy.company}}</p>
   </div>
   <div class="box">
     <p class="label">Location</p>
-    <p class="name">{{vacant.location}}</p>
+    <p class="name">{{vacancy.location}}</p>
   </div>
     <div class="box">
     <p class="label">Contract</p>
-    <p class="name">{{vacant.contract}}</p>
+    <p class="name">{{vacancy.contract}}</p>
   </div>
     <div class="box">
     <p class="label">Salary</p>
-    <p class="name">$ {{vacant.salary}}</p>
+    <p class="name">$ {{vacancy.salary}}</p>
   </div>
 </div>
 
-<div class="vacant-container container">
+<div class="vacancy-container container">
   <main class="content">
     <h2>Description Job</h2>
-    <div class="vacant-description">
-      {{{vacant.description}}}
+    <div class="vacancy-description">
+      {{{vacancy.description}}}
     </div>
 
-    <a href="/vacancies/edit/{{vacant.url}}" class="btn btn-blue edit-btn">Edit Vacancy</a>
+    <a href="/vacancies/edit/{{vacancy.url}}" class="btn btn-blue edit-btn">Edit Vacancy</a>
   </main>
   <aside class="aside">
     <h2>Desired Skills</h2>
     <ul class="skills">
-      {{#each vacant.skills}}
+      {{#each vacancy.skills}}
         <li>{{this}}</li>
       {{/each}}
     </ul>
