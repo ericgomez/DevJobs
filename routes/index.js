@@ -18,6 +18,7 @@ const {
 
 const {
   authenticateUser,
+  isAuthenticated,
   showDashboard
 } = require('../controllers/authController')
 
@@ -25,13 +26,13 @@ module.exports = () => {
   router.get('/', showJobs)
 
   // create vacancies
-  router.get('/vacancies/new', formNewVacant)
-  router.post('/vacancies/new', addVacant)
+  router.get('/vacancies/new', isAuthenticated, formNewVacant)
+  router.post('/vacancies/new', isAuthenticated, addVacant)
 
   // Show vacancy
   router.get('/vacancies/:url', showVacant)
-  router.get('/vacancies/edit/:url', formEditVacant)
-  router.post('/vacancies/edit/:url', editVacant)
+  router.get('/vacancies/edit/:url', isAuthenticated, formEditVacant)
+  router.post('/vacancies/edit/:url', isAuthenticated, editVacant)
 
   // create account
   router.get('/create-account', formCreateAccount)
@@ -42,7 +43,7 @@ module.exports = () => {
   router.post('/login', authenticateUser)
 
   // management
-  router.get('/management', showDashboard)
+  router.get('/management', isAuthenticated, showDashboard)
 
   return router
 }

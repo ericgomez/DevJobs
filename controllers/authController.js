@@ -7,6 +7,14 @@ const authenticateUser = passport.authenticate('local', {
   // badRequestMessage: 'both fields are required' // change default message
 })
 
+//check if user is authenticated
+const isAuthenticated = (req, res, next) => {
+  if (req.isAuthenticated()) {
+    return next()
+  }
+  res.redirect('/login')
+}
+
 const showDashboard = (req, res) => {
   res.render('management/dashboard', {
     pageName: 'Dashboard',
@@ -16,5 +24,6 @@ const showDashboard = (req, res) => {
 
 module.exports = {
   authenticateUser,
+  isAuthenticated,
   showDashboard
 }
