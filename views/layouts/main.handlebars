@@ -40,6 +40,14 @@
   </header>
 
   <div class="content-superior container">
+    {{#if messages}}
+      <div class="alerts">
+        {{#showAlert messages}}
+           
+        {{/showAlert}}
+      </div>
+    {{/if}}
+
     {{{body}}}
   </div>
 
