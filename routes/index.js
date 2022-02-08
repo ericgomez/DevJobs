@@ -13,7 +13,8 @@ const {
   formCreateAccount,
   confirmRegistration,
   addUser,
-  formLogin
+  formLogin,
+  formEditProfile
 } = require('../controllers/usersController')
 
 const {
@@ -44,6 +45,9 @@ module.exports = () => {
 
   // management
   router.get('/management', isAuthenticated, showDashboard)
+
+  // edit - profile
+  router.get('/edit-profile', isAuthenticated, formEditProfile)
 
   return router
 }

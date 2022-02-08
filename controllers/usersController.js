@@ -86,9 +86,18 @@ const formLogin = (req, res = response) => {
   })
 }
 
+const formEditProfile = (req, res = response) => {
+  res.render('users/edit-profile', {
+    pageName: 'Edit Profile',
+    tagline: 'Edit your profile',
+    user: req.user
+  })
+}
+
 module.exports = {
   formCreateAccount,
   confirmRegistration,
   addUser,
-  formLogin
+  formLogin,
+  formEditProfile
 }
