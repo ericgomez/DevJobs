@@ -21,7 +21,8 @@ const {
 const {
   authenticateUser,
   isAuthenticated,
-  showDashboard
+  showDashboard,
+  logout
 } = require('../controllers/authController')
 
 module.exports = () => {
@@ -50,6 +51,9 @@ module.exports = () => {
   // edit - profile
   router.get('/edit-profile', isAuthenticated, formEditProfile)
   router.post('/edit-profile', isAuthenticated, editProfile)
+
+  // logout
+  router.get('/logout', isAuthenticated, logout)
 
   return router
 }

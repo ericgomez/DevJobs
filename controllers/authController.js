@@ -20,8 +20,6 @@ const showDashboard = async (req, res) => {
   // check user authentication
   const vacancies = await Vacancy.find({ author: req.user._id })
 
-  console.log(vacancies)
-
   res.render('management/dashboard', {
     pageName: 'Dashboard',
     tagline: 'Management',
@@ -31,8 +29,16 @@ const showDashboard = async (req, res) => {
   })
 }
 
+const logout = (req, res) => {
+  req.logout()
+
+  req.flash('correct', 'You are logged out')
+  return res.redirect('/login')
+}
+
 module.exports = {
   authenticateUser,
   isAuthenticated,
-  showDashboard
+  showDashboard,
+  logout
 }
