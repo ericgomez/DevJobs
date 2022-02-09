@@ -100,17 +100,21 @@ const formEditProfile = (req, res = response) => {
 }
 
 const editProfile = async (req, res = response, next) => {
-  const { name, email, password } = req.body
-
   const user = await User.findById(req.user._id)
 
-  user.name = name
-  user.email = email
+  user.name = req.body.name
+  user.email = req.body.email
 
   // if password is not empty
-  if (password) {
-    user.password = password
+  if (req.body.password) {
+    user.password = req.body.password
   }
+
+  // if image is not empty
+  if (req.file) {
+    user.image = req.file.filename
+  }
+  console.log(user)
 
   try {
     await user.save()
@@ -138,7 +142,7 @@ const validateProfile = async (req, res, next) => {
     .withMessage('email format not valid')
     .run(req)
 
-  await check('password', 'password is required')
+  await check()
     .escape()
     .trim()
     .run(req)
@@ -189,7 +193,20 @@ const configurationMulter = {
 
       cb(null, `${nanoid()}.${extension}`)
     }
-  })
+  }),
+  // Accept images only
+  fileFilter: (req, file, cb) => {
+    // Reject a file
+    if (file.mimetype.startsWith('image')) {
+      cb(null, true)
+    } else {
+      cb(new Error('The file is not an image'))
+    }
+  },
+  // Limits the size of uploaded files
+  limit: {
+    fileSize: 1024 * 1024 * 5
+  }
 }
 
 const upload = multer(configurationMulter).single('image')
