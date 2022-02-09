@@ -38,7 +38,7 @@ const showVacancy = async (req, res = response, next) => {
     ['name', 'image']
   )
 
-  console.log(vacancy)
+  //console.log(vacancy)
 
   if (!vacancy) return next()
 
@@ -210,14 +210,32 @@ const configurationMulter = {
     if (file.mimetype === 'application/pdf') {
       cb(null, true)
     } else {
-      cb(new Error('The file is not an image'))
+      cb(new Error('The file is not an PDF'))
     }
   }
 }
 
 const upload = multer(configurationMulter).single('cv')
 
-const addCandidate = () => {}
+const addCandidate = async (req, res, next) => {
+  const vacancy = await Vacancy.findOne({ url: req.params.url })
+
+  console.log(vacancy, 'Hello')
+  if (!vacancy) return next()
+
+  const newCandidate = {
+    name: req.body.name,
+    email: req.body.email,
+    cv: req.file.filename
+  }
+
+  // save
+  vacancy.candidates.push(newCandidate)
+  await vacancy.save()
+
+  req.flash('correct', 'Your CV was send successfully')
+  res.redirect('/')
+}
 
 module.exports = {
   formNewVacancy,

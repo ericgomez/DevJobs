@@ -53,6 +53,9 @@ module.exports = () => {
   // delete vacancy
   router.delete('/vacancies/delete/:id', deleteVacancy)
 
+  // get message of candidates
+  router.post('/vacancies/:url', uploadCV, addCandidate)
+
   // create account
   router.get('/create-account', formCreateAccount)
   router.post('/create-account', confirmRegistration, addUser)
@@ -73,9 +76,6 @@ module.exports = () => {
     uploadImage,
     editProfile
   )
-
-  // get message of candidates
-  router.post('/vacancies/:url', uploadCV, addCandidate)
 
   // logout
   router.get('/logout', isAuthenticated, logout)

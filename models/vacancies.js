@@ -35,7 +35,7 @@ const VacanciesSchema = Schema({
     lowercase: true
   },
   skills: [String],
-  candidate: [
+  candidates: [
     {
       name: String,
       email: String,
