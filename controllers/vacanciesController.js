@@ -220,7 +220,6 @@ const upload = multer(configurationMulter).single('cv')
 const addCandidate = async (req, res, next) => {
   const vacancy = await Vacancy.findOne({ url: req.params.url })
 
-  console.log(vacancy, 'Hello')
   if (!vacancy) return next()
 
   const newCandidate = {
