@@ -400,9 +400,10 @@ p.candidates {
   color: #616065;
 }
 .admin-profile {
-  width: 120px;
+  width: 80px;
   align-self: flex-start;
   margin-right: 1rem;
+  border-radius: 10%;
 }
 .logout p,
 .logout a {

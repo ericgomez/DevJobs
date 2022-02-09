@@ -24,6 +24,7 @@ const showDashboard = async (req, res) => {
     pageName: 'Dashboard',
     tagline: 'Management',
     name: req.user.name,
+    image: req.user.image,
     logout: true,
     vacancies
   })

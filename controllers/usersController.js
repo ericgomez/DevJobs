@@ -95,6 +95,7 @@ const formEditProfile = (req, res = response) => {
     tagline: 'Edit your profile',
     user: req.user,
     name: req.user.name,
+    image: req.user.image,
     logout: true
   })
 }
@@ -161,6 +162,7 @@ const validateProfile = async (req, res, next) => {
       tagline: 'Edit your profile',
       user: req.user,
       name: req.user.name,
+      image: req.user.image,
       logout: true,
       messages: req.flash()
     })

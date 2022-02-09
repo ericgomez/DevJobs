@@ -29,6 +29,9 @@
     {{#if logout}}
       <div class="logout">
         <p>Hello! {{name}}</p>
+        {{#if image}}
+          <img src="/uploads/profiles/{{image}}" alt="{{name}}" class="admin-profile">
+        {{/if}}
         <a href="/management">Dashboard</a>
         <a href="/logout">Logout</a>
       </div>

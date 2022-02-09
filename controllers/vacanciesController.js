@@ -8,6 +8,7 @@ const formNewVacancy = (req, res = response) => {
     pageName: 'New Vacancy',
     tagline: 'Create a new vacancy',
     name: req.user.name,
+    image: req.user.image,
     logout: true
   })
 }
@@ -51,6 +52,7 @@ const formEditVacancy = async (req, res = response, next) => {
     tagline: 'Edit a vacancy',
     vacancy,
     name: req.user.name,
+    image: req.user.image,
     logout: true
   })
 }
@@ -146,6 +148,7 @@ const validateVacancy = async (req, res, next) => {
       pageName: 'New Vacancy',
       tagline: 'Create a new vacancy',
       name: req.user.name,
+      image: req.user.image,
       logout: true,
       messages: req.flash()
     })
