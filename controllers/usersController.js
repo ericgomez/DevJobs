@@ -151,7 +151,7 @@ const validateProfile = async (req, res, next) => {
   const { errors } = validationResult(req)
   // console.log(errors)
 
-  if (errors) {
+  if (errors.length) {
     req.flash(
       'error',
       errors.map(error => error.msg)

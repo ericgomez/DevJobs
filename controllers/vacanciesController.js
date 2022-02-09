@@ -31,7 +31,12 @@ const addVacancy = async (req, res = response) => {
 }
 
 const showVacancy = async (req, res = response, next) => {
-  const vacancy = await Vacancy.findOne({ url: req.params.url })
+  const vacancy = await Vacancy.findOne({ url: req.params.url }).populate(
+    'author',
+    ['name', 'image']
+  )
+
+  console.log(vacancy)
 
   if (!vacancy) return next()
 
@@ -138,7 +143,7 @@ const validateVacancy = async (req, res, next) => {
   const { errors } = validationResult(req)
   // console.log(errors)
 
-  if (errors) {
+  if (errors.length) {
     req.flash(
       'error',
       errors.map(error => error.msg)
