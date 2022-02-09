@@ -11,7 +11,8 @@ const {
   validateVacancy,
   deleteVacancy,
   uploadCV,
-  addCandidate
+  addCandidate,
+  showCandidates
 } = require('../controllers/vacanciesController')
 const {
   formCreateAccount,
@@ -76,6 +77,9 @@ module.exports = () => {
     uploadImage,
     editProfile
   )
+
+  // show candidates by vacancy
+  router.get('/candidates/:id', isAuthenticated, showCandidates)
 
   // logout
   router.get('/logout', isAuthenticated, logout)

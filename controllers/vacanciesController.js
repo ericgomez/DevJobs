@@ -236,6 +236,21 @@ const addCandidate = async (req, res, next) => {
   res.redirect('/')
 }
 
+const showCandidates = async (req, res, next) => {
+  const vacancy = await Vacancy.findById(req.params.id)
+
+  if (!vacancy) return next()
+  if (vacancy.author != req.user._id.toString()) return next()
+
+  res.render('candidates/candidates', {
+    pageName: `Candidates by Vacancy - ${vacancy.title}`,
+    name: req.user.name,
+    image: req.user.image,
+    candidates: vacancy.candidates,
+    logout: true
+  })
+}
+
 module.exports = {
   formNewVacancy,
   addVacancy,
@@ -245,5 +260,6 @@ module.exports = {
   validateVacancy,
   deleteVacancy,
   uploadCV,
-  addCandidate
+  addCandidate,
+  showCandidates
 }
