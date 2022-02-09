@@ -175,7 +175,11 @@ const uploadImage = (req, res = response, next) => {
   upload(req, res, function (error) {
     if (error) {
       if (error instanceof multer.MulterError) {
-        return next()
+        if (error.code === 'LIMIT_FILE_SIZE') {
+          req.flash('error', 'File size is too big')
+        } else {
+          req.flash('error', error.message)
+        }
       } else {
         req.flash('error', error.message)
       }
@@ -189,6 +193,10 @@ const uploadImage = (req, res = response, next) => {
 }
 
 const configurationMulter = {
+  // Limits the size of uploaded files
+  limit: {
+    fileSize: 1024 * 1024 * 5
+  },
   storage: multer.diskStorage({
     destination: (req, file, cb) => {
       cb(null, __dirname + './../public/uploads/profiles')
@@ -208,10 +216,6 @@ const configurationMulter = {
     } else {
       cb(new Error('The file is not an image'))
     }
-  },
-  // Limits the size of uploaded files
-  limit: {
-    fileSize: 1024 * 1024 * 5
   }
 }
 
