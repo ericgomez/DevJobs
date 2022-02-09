@@ -1,6 +1,7 @@
 const { response } = require('express')
 const { check, validationResult } = require('express-validator')
 const multer = require('multer')
+const { nanoid } = require('nanoid')
 
 const User = require('../models/users')
 
@@ -176,6 +177,22 @@ const uploadImage = (req, res = response, next) => {
 
   next()
 }
+
+const configurationMulter = {
+  storage: multer.diskStorage({
+    destination: (req, file, cb) => {
+      cb(null, __dirname + './../public/uploads/profiles')
+    },
+    filename: (req, file, cb) => {
+      // Generate a unique filename
+      const extension = file.mimetype.split('/')[1]
+
+      cb(null, `${nanoid()}.${extension}`)
+    }
+  })
+}
+
+const upload = multer(configurationMulter).single('image')
 
 module.exports = {
   formCreateAccount,
