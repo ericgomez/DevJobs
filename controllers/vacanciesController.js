@@ -1,5 +1,7 @@
 const { response } = require('express')
 const { check, validationResult } = require('express-validator')
+const { nanoid } = require('nanoid')
+const multer = require('multer')
 
 const Vacancy = require('../models/vacancies')
 
@@ -164,6 +166,59 @@ const validateVacancy = async (req, res, next) => {
   next()
 }
 
+// upload file
+const uploadCV = (req, res = response, next) => {
+  upload(req, res, function (error) {
+    if (error) {
+      if (error instanceof multer.MulterError) {
+        if (error.code === 'LIMIT_FILE_SIZE') {
+          req.flash('error', 'File size is too big')
+        } else {
+          req.flash('error', error.message)
+        }
+      } else {
+        req.flash('error', error.message)
+      }
+
+      res.redirect('back')
+      return
+    } else {
+      return next()
+    }
+  })
+}
+
+const configurationMulter = {
+  // Limits the size of uploaded files
+  limit: {
+    fileSize: 1024 * 1024 * 5
+  },
+  storage: multer.diskStorage({
+    destination: (req, file, cb) => {
+      cb(null, __dirname + './../public/uploads/cv')
+    },
+    filename: (req, file, cb) => {
+      // Generate a unique filename
+      const extension = file.mimetype.split('/')[1]
+
+      cb(null, `${nanoid()}.${extension}`)
+    }
+  }),
+  // Accept images only
+  fileFilter: (req, file, cb) => {
+    // Reject a file
+    if (file.mimetype === 'application/pdf') {
+      cb(null, true)
+    } else {
+      cb(new Error('The file is not an image'))
+    }
+  }
+}
+
+const upload = multer(configurationMulter).single('cv')
+
+const addCandidate = () => {}
+
 module.exports = {
   formNewVacancy,
   addVacancy,
@@ -171,5 +226,7 @@ module.exports = {
   formEditVacancy,
   editVacancy,
   validateVacancy,
-  deleteVacancy
+  deleteVacancy,
+  uploadCV,
+  addCandidate
 }
