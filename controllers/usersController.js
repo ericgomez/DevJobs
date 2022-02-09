@@ -114,7 +114,6 @@ const editProfile = async (req, res = response, next) => {
   if (req.file) {
     user.image = req.file.filename
   }
-  console.log(user)
 
   try {
     await user.save()
@@ -174,12 +173,19 @@ const validateProfile = async (req, res, next) => {
 
 const uploadImage = (req, res = response, next) => {
   upload(req, res, function (error) {
-    if (error instanceof multer.MulterError) {
+    if (error) {
+      if (error instanceof multer.MulterError) {
+        return next()
+      } else {
+        req.flash('error', error.message)
+      }
+
+      res.redirect('/management')
+      return
+    } else {
       return next()
     }
   })
-
-  next()
 }
 
 const configurationMulter = {
