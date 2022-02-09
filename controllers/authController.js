@@ -37,9 +37,18 @@ const logout = (req, res) => {
   return res.redirect('/login')
 }
 
+// forgot password
+const formResetPassword = (req, res) => {
+  res.render('auth/reset-password', {
+    pageName: 'Reset Password',
+    tagline: 'Reset your password'
+  })
+}
+
 module.exports = {
   authenticateUser,
   isAuthenticated,
   showDashboard,
+  formResetPassword,
   logout
 }

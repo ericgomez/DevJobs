@@ -29,6 +29,7 @@ const {
   authenticateUser,
   isAuthenticated,
   showDashboard,
+  formResetPassword,
   logout
 } = require('../controllers/authController')
 
@@ -80,6 +81,9 @@ module.exports = () => {
 
   // show candidates by vacancy
   router.get('/candidates/:id', isAuthenticated, showCandidates)
+
+  // forgot password
+  router.get('/reset-password', formResetPassword)
 
   // logout
   router.get('/logout', isAuthenticated, logout)
