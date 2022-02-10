@@ -65,7 +65,7 @@ const sendToken = async (req, res, next) => {
 
   await sendEmail({
     subject: 'Password Reset',
-    file: 'mail',
+    template: 'reset-by-email',
     user,
     resetUrl
   })

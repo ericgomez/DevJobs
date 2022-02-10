@@ -13,12 +13,26 @@ const sendEmail = async options => {
     }
   })
 
+  // usage template of handlebars
+  transporter.use(
+    'compile',
+    hbs({
+      viewEngine: {
+        extname: '.handlebars', // handlebars extension
+        layoutsDir: 'views/emails/', // location of handlebars templates
+        defaultLayout: 'reset-by-email' // name of main template
+      },
+      viewPath: 'views/emails',
+      extName: '.handlebars'
+    })
+  )
+
   // send mail with defined transport object
   let info = await transporter.sendMail({
     from: '"devJobs 👻" <noreply@devjobs.com>', // sender address
     to: options.user.email, // list of receivers
     subject: options.subject, // Subject line
-    template: options.file,
+    template: options.template,
     context: {
       resetUrl: options.resetUrl
     }
@@ -27,6 +41,4 @@ const sendEmail = async options => {
   return info
 }
 
-module.exports = {
-  sendEmail
-}
+module.exports = sendEmail
