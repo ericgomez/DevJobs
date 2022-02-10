@@ -4,8 +4,9 @@
   "description": "Dev Job",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon ./index",
-    "start": "concurrently \"npm run dev\" \"npm run watch\"",
+    "dev-watch": "nodemon ./index",
+    "dev": "concurrently \"npm run dev-watch\" \"npm run watch\"",
+    "start": "node ./index",
     "watch": "webpack --watch --mode=development"
   },
   "author": "Eric Gomez <eric.gomez.sanchez@gmail.com>",
