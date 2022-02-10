@@ -30,6 +30,7 @@ const {
   isAuthenticated,
   showDashboard,
   formResetPassword,
+  sendToken,
   logout
 } = require('../controllers/authController')
 
@@ -84,6 +85,7 @@ module.exports = () => {
 
   // forgot password
   router.get('/reset-password', formResetPassword)
+  router.post('/reset-password', sendToken)
 
   // logout
   router.get('/logout', isAuthenticated, logout)

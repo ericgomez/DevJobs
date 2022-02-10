@@ -1,5 +1,7 @@
 const passport = require('passport')
 const Vacancy = require('../models/vacancies')
+const User = require('../models/users')
+const crypto = require('crypto')
 
 const authenticateUser = passport.authenticate('local', {
   successRedirect: '/management',
@@ -45,10 +47,32 @@ const formResetPassword = (req, res) => {
   })
 }
 
+const sendToken = async (req, res, next) => {
+  const user = await User.findOne({ email: req.body.email })
+
+  if (!user) {
+    req.flash('error', 'The account not exist')
+    return res.redirect('/login')
+  }
+
+  // User exist
+  user.token = crypto.randomBytes(20).toString('hex')
+  user.tokenExpires = Date.now() + 3600000
+
+  await user.save()
+  const resetUrl = `${req.headers.origin}/reset-password/${user.token}`
+
+  console.log(resetUrl)
+
+  req.flash('correct', 'We sent you an email')
+  res.redirect('/login')
+}
+
 module.exports = {
   authenticateUser,
   isAuthenticated,
   showDashboard,
   formResetPassword,
+  sendToken,
   logout
 }
