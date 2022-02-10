@@ -251,6 +251,24 @@ const showCandidates = async (req, res, next) => {
   })
 }
 
+const searchVacancies = async (req, res, next) => {
+  const { q } = req.body
+
+  const vacancies = await Vacancy.find({
+    $or: [
+      { title: { $regex: q, $options: 'i' } },
+      { company: { $regex: q, $options: 'i' } }
+    ]
+  })
+
+  res.render('home', {
+    pageName: `Search Vacancies - ${q}`,
+    tagline: 'Find your dream job',
+    line: true,
+    vacancies
+  })
+}
+
 module.exports = {
   formNewVacancy,
   addVacancy,
@@ -261,5 +279,6 @@ module.exports = {
   deleteVacancy,
   uploadCV,
   addCandidate,
-  showCandidates
+  showCandidates,
+  searchVacancies
 }

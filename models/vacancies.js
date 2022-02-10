@@ -56,4 +56,7 @@ VacanciesSchema.pre('save', function (next) {
   next()
 })
 
+// create index unique
+VacanciesSchema.index({ title: 'text' })
+
 module.exports = model('Vacancy', VacanciesSchema)

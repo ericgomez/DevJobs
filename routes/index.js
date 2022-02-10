@@ -12,7 +12,8 @@ const {
   deleteVacancy,
   uploadCV,
   addCandidate,
-  showCandidates
+  showCandidates,
+  searchVacancies
 } = require('../controllers/vacanciesController')
 const {
   formCreateAccount,
@@ -92,6 +93,9 @@ module.exports = () => {
   // reset password in db
   router.get('/reset-password/:token', resetPassword)
   router.post('/reset-password/:token', savePassword)
+
+  // searching
+  router.post('/search', searchVacancies)
 
   // logout
   router.get('/logout', isAuthenticated, logout)
