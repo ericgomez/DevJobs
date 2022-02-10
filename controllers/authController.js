@@ -74,11 +74,30 @@ const sendToken = async (req, res, next) => {
   res.redirect('/login')
 }
 
+const resetPassword = async (req, res) => {
+  // check if token is valid
+  const user = await User.findOne({
+    token: req.params.token,
+    tokenExpires: { $gt: Date.now() }
+  })
+
+  if (!user) {
+    req.flash('error', 'Token is invalid or has expired')
+    return res.redirect('/reset-password')
+  }
+
+  res.render('auth/new-password', {
+    pageName: 'New Password',
+    tagline: 'Enter your new password'
+  })
+}
+
 module.exports = {
   authenticateUser,
   isAuthenticated,
   showDashboard,
   formResetPassword,
   sendToken,
+  resetPassword,
   logout
 }
