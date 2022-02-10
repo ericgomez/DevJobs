@@ -2,6 +2,7 @@ const passport = require('passport')
 const Vacancy = require('../models/vacancies')
 const User = require('../models/users')
 const crypto = require('crypto')
+const sendEmail = require('../handlers/email')
 
 const authenticateUser = passport.authenticate('local', {
   successRedirect: '/management',
@@ -62,7 +63,12 @@ const sendToken = async (req, res, next) => {
   await user.save()
   const resetUrl = `${req.headers.origin}/reset-password/${user.token}`
 
-  console.log(resetUrl)
+  await sendEmail({
+    subject: 'Password Reset',
+    file: 'mail',
+    user,
+    resetUrl
+  })
 
   req.flash('correct', 'We sent you an email')
   res.redirect('/login')
