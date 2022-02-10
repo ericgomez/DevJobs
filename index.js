@@ -5,6 +5,7 @@ const session = require('express-session')
 const MongoStore = require('connect-mongo')
 const bodyParser = require('body-parser')
 const flash = require('connect-flash')
+const createError = require('http-errors')
 
 require('dotenv').config()
 
@@ -62,5 +63,18 @@ app.use((req, res, next) => {
 })
 
 app.use('/', router())
+
+// 404 page not found
+app.use((req, res, next) => {
+  next(createError(404, 'Page not found'))
+})
+
+// error handler
+app.use((err, req, res, next) => {
+  res.locals.error = err.message
+
+  res.status(err.status || 500)
+  res.render('errors/error')
+})
 
 app.listen(process.env.PORT)
