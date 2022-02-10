@@ -92,6 +92,28 @@ const resetPassword = async (req, res) => {
   })
 }
 
+const savePassword = async (req, res) => {
+  const user = await User.findOne({
+    token: req.params.token,
+    tokenExpires: { $gt: Date.now() }
+  })
+
+  if (!user) {
+    req.flash('error', 'Token is invalid or has expired')
+    return res.redirect('/reset-password')
+  }
+
+  // set new password
+  user.password = req.body.password
+  user.token = undefined
+  user.tokenExpires = undefined
+
+  await user.save()
+
+  req.flash('correct', 'Your password has been changed')
+  res.redirect('/login')
+}
+
 module.exports = {
   authenticateUser,
   isAuthenticated,
@@ -99,5 +121,6 @@ module.exports = {
   formResetPassword,
   sendToken,
   resetPassword,
+  savePassword,
   logout
 }
